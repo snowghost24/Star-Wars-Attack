@@ -15,71 +15,140 @@
    <link href="https://fonts.googleapis.com/css?family=Anton|Bahiana|Faster+One|Racing+Sans+One|Timmana" rel="stylesheet">
    <title>Star Wars</title>
    <style>
-      .charaqimg{
+      .secImgc {
+         position: relative;
+      }
+
+      .charaqimg {
          height: 250px;
          width: auto;
          max-width: 194px;
          border: 2px solid black;
       }
-      
+
       .characters {
          display: flex;
          justify-content: space-around;
+         position: relative;
       }
 
-      .titleName{
+      .titleName {
          text-align: center;
          color: white;
-
       }
+
       header {
          background-color: black;
-         margin-bottom: 10px;
+
          display: flex;
          justify-content: center;
       }
-      #headerImg{
+
+      #headerImg {
          height: 120px;
          width: auto;
-         
       }
 
-      body {
-         background-image:url("assets/images/ship.jpg");
+      .tcontainer {
+         background-image: url("assets/images/DeathStar2.jpg");
+         background-size: cover;
+         height: 900px;
+      }
+
+      #vsimg {
+         width: 200px;
+         height: auto;
+         position: absolute;
+         right: 614px;
+         top: 600px;
+         display: none;
       }
    </style>
 </head>
 
 <body>
    <header>
-      <img id="headerImg" src="assets/images/stw3.jpeg" alt="">
+      <img id="headerImg" src="assets/images/warbanner.jpg" alt="">
    </header>
-   <div class="characters">
+   <div class="versus">
+      <img id="vsimg" src="assets/images/vs3.png" alt="">
+   </div>
+   <div class="tcontainer">
+      <div class="characters">
+      </div>
+
 
    </div>
-
    <script>
       var starWars = {
          characters: {
             luke: {
                name: "Luke Skywalker",
-               image: "assets/images/lukecartoon.jpg"
+               image: "assets/images/lukecartoon.jpg",
+               selected: false,
+               defeated: false,
+               selecLoc: function () {
+                  $(".secImgc:nth-child(1)").animate({ top: '450px' }, 4000);
+                  $(".secImgc:nth-child(1)").animate({ left: '250px' }, 4000);
+
+               },
+               oppLoc: function () {
+                  $(".secImgc:nth-child(1)").animate({ top: '450px' }, 4000);
+                  $(".secImgc:nth-child(1)").animate({ left: '830px' }, 4000);
+
+               }
 
             },
             yoda: {
                name: "Yoda",
                image: "assets/images/Yoda_cartoon.jpg",
+               defeated: false,
+               selected: false,
+               selecLoc: function () {
+                  $(".secImgc:nth-child(2)").animate({ top: '450px' }, 4000);
+                  $(".secImgc:nth-child(2)").animate({ right: '112px' }, 4000);
+
+               },
+               oppLoc: function () {
+                  $(".secImgc:nth-child(2)").animate({ top: '450px' }, 4000);
+                  $(".secImgc:nth-child(2)").animate({ left: '470px' }, 4000);
+
+               }
+
 
             },
             darthMaul: {
                name: "Darth Maul",
-               image: "assets/images/maul.jpg"
+               image: "assets/images/maul.jpg",
+               defeated: false,
+               selected: false,
+               selecLoc: function () {
+                  $(".secImgc:nth-child(3)").animate({ top: '450px' }, 4000);
+                  $(".secImgc:nth-child(3)").animate({ left: '112px' }, 4000);
+
+               },
+               oppLoc: function () {
+                  $(".secImgc:nth-child(3)").animate({ top: '450px' }, 4000);
+                  $(".secImgc:nth-child(3)").animate({ left: '110px' }, 4000);
+
+               }
 
             },
             darthVadar: {
                name: "Darth Vader",
-               image: "assets/images/vadar5.jpg"
+               image: "assets/images/vadar5.jpg",
+               defeated: false,
+               selected: false,
+               selecLoc: function () {
+                  $(".secImgc:nth-child(4)").animate({ top: '450px' }, 4000);
+                  $(".secImgc:nth-child(4)").animate({ right: '830px' }, 4000);
 
+               },
+               oppLoc: function () {
+                  $(".secImgc:nth-child(4)").animate({ top: '450px' }, 4000);
+                  $(".secImgc:nth-child(4)").animate({ right: '250px' }, 4000);
+
+               }
             }
          },
          attack: function () {
@@ -94,25 +163,71 @@
       for (var key in starWars.characters) {
          // console.log(key, starWars.characters[key].image);
          var secImg = document.createElement("DIV");
+         secImg.setAttribute("class", "secImgc");
          var imageLocation = starWars.characters[key].image;
          var names = starWars.characters[key].name;
          var characterTitle = document.createElement("H3");
          var img = document.createElement("IMG");
          var divNode = document.createTextNode(names);
          img.src = imageLocation;
-         characterTitle.setAttribute("class","titleName");
-         img.setAttribute("class","charaqimg");
+         characterTitle.setAttribute("class", "titleName");
+         img.setAttribute("class", "charaqimg");
          characterTitle.append(divNode);
          secImg.appendChild(img);
          console.log(imageLocation);
          secImg.appendChild(characterTitle);
-         document.querySelector(".characters").appendChild(secImg);   
+         document.querySelector(".characters").appendChild(secImg);
       }
 
+      //maul  selected 
+      $(".secImgc:nth-child(3)").click(function () {
+         starWars.characters.darthMaul.selecLoc();     
+       });
+    
 
-      
- 
-      
+
+      // maul opponent
+      // $(".secImgc:nth-child(3)").click(function () {
+      //    starWars.characters.darthMaul.oppLoc();
+      // });
+
+
+
+      // Yoda  opponent 
+      // $(".secImgc:nth-child(2)").click(function () {
+      //    starWars.characters.yoda.selecLoc();
+
+      // });
+
+
+      // yoda selected
+      $(".secImgc:nth-child(2)").click(function () {
+         starWars.characters.yoda.oppLoc();
+
+      });
+
+
+      //Luke selected
+      // $(".secImgc:nth-child(1)").click(function () {
+      //    starWars.characters.luke.selecLoc();
+      // });
+
+      //Luke  opponent
+      $(".secImgc:nth-child(1)").click(function () {
+         starWars.characters.luke.oppLoc();
+      });
+
+
+
+      // Vader  oponent
+      // $(".secImgc:nth-child(4)").click(function () {
+      //    starWars.characters.darthVadar.selecLoc();
+      // });
+
+      //  Vader  selected
+      $(".secImgc:nth-child(4)").click(function () {
+         starWars.characters.darthVadar.oppLoc();
+      });
    </script>
 </body>
 
