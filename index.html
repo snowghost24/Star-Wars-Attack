@@ -61,7 +61,7 @@
          position: absolute;
          right: 614px;
          top: 600px;
-         display: none;
+      
       }
    </style>
 </head>
@@ -71,7 +71,7 @@
       <img id="headerImg" src="assets/images/warbanner.jpg" alt="">
    </header>
    <div class="versus">
-      <img id="vsimg" src="assets/images/vs3.png" alt="">
+      <!-- <img id="vsimg" src="assets/images/vs3.png" alt=""> -->
    </div>
    <div class="tcontainer">
       <div class="characters">
@@ -81,73 +81,76 @@
    </div>
    <script>
       var starWars = {
+         characterCount:0,
          characters: {
             luke: {
                name: "Luke Skywalker",
                image: "assets/images/lukecartoon.jpg",
                selected: false,
                defeated: false,
+               inBattle: false,
                selecLoc: function () {
                   $(".secImgc:nth-child(1)").animate({ top: '450px' }, 4000);
                   $(".secImgc:nth-child(1)").animate({ left: '250px' }, 4000);
-
                },
                oppLoc: function () {
                   $(".secImgc:nth-child(1)").animate({ top: '450px' }, 4000);
-                  $(".secImgc:nth-child(1)").animate({ left: '830px' }, 4000);
+                  $(".secImgc:nth-child(1)").animate({ left: '830px' }, 4000, function(){
+                     starWars.showVs();
+                  });
+                 
 
                }
-
             },
             yoda: {
                name: "Yoda",
                image: "assets/images/Yoda_cartoon.jpg",
                defeated: false,
                selected: false,
+               inBattle: false,
                selecLoc: function () {
                   $(".secImgc:nth-child(2)").animate({ top: '450px' }, 4000);
                   $(".secImgc:nth-child(2)").animate({ right: '112px' }, 4000);
-
                },
                oppLoc: function () {
                   $(".secImgc:nth-child(2)").animate({ top: '450px' }, 4000);
-                  $(".secImgc:nth-child(2)").animate({ left: '470px' }, 4000);
-
+                  $(".secImgc:nth-child(2)").animate({ left: '470px' },4000, function(){
+                     starWars.showVs();
+                  });
                }
-
-
             },
             darthMaul: {
                name: "Darth Maul",
                image: "assets/images/maul.jpg",
                defeated: false,
-               selected: false,
+               selected: true,
+               inBattle: false,
                selecLoc: function () {
                   $(".secImgc:nth-child(3)").animate({ top: '450px' }, 4000);
-                  $(".secImgc:nth-child(3)").animate({ left: '112px' }, 4000);
-
+                  $(".secImgc:nth-child(3)").animate({ right: '470px' }, 4000);
                },
                oppLoc: function () {
                   $(".secImgc:nth-child(3)").animate({ top: '450px' }, 4000);
-                  $(".secImgc:nth-child(3)").animate({ left: '110px' }, 4000);
-
+                  $(".secImgc:nth-child(3)").animate({ left: '110px' }, 4000, function(){
+                     starWars.showVs();
+                  });
                }
-
             },
             darthVadar: {
                name: "Darth Vader",
                image: "assets/images/vadar5.jpg",
                defeated: false,
                selected: false,
+               inBattle: false,
                selecLoc: function () {
                   $(".secImgc:nth-child(4)").animate({ top: '450px' }, 4000);
                   $(".secImgc:nth-child(4)").animate({ right: '830px' }, 4000);
-
                },
                oppLoc: function () {
                   $(".secImgc:nth-child(4)").animate({ top: '450px' }, 4000);
-                  $(".secImgc:nth-child(4)").animate({ right: '250px' }, 4000);
-
+                  $(".secImgc:nth-child(4)").animate({ right: '250px' }, 4000, function(){
+                     starWars.showVs();
+                  });
                }
             }
          },
@@ -157,7 +160,19 @@
          startGame: function () {
 
 
+         },
+         showVs:function () {
+            console.log("im here")
+   $(".versus").append('<img id="vsimg" src="assets/images/vs3.png">');
+   setTimeout(function () {starWars.hideVS()},3000);
+
+         },
+         hideVS:function(){
+            console.log("im deep");
+          $("#vsimg").hide();
          }
+         
+
 
       }
       for (var key in starWars.characters) {
@@ -180,10 +195,73 @@
       }
 
       //maul  selected 
-      $(".secImgc:nth-child(3)").click(function () {
-         starWars.characters.darthMaul.selecLoc();     
+      // $(".secImgc:nth-child(1)").click(function () {
+      //    if (starWars.characterCount == 0){
+      //       console.log(starWars.characterCount);
+      //       starWars.characters.luke.selecLoc();
+      //       starWars.characterCount++
+      //    } else if (starWars.characterCount == 1){
+      //       console.log(starWars.characterCount);
+      //       starWars.characters.luke.oppLoc();
+      //       starWars.characterCount++
+      //    }      
+      //  });
+
+
+       $(".secImgc:nth-child(1)").click(function () {
+         if (starWars.characterCount == 0){
+            console.log(starWars.characterCount);
+            starWars.characters.luke.selecLoc();
+            starWars.characterCount++
+         }else if (starWars.characterCount == 1){
+            console.log(starWars.characterCount);
+            starWars.characters.luke.oppLoc();
+            starWars.characterCount++
+         }      
+       });
+
+
+
+
+       $(".secImgc:nth-child(2)").click(function () {
+         if (starWars.characterCount == 0){
+            console.log(starWars.characterCount);
+            starWars.characters.yoda.selecLoc();
+            starWars.characterCount++
+         }else if (starWars.characterCount == 1){
+            console.log(starWars.characterCount);
+            starWars.characters.yoda.oppLoc();
+            starWars.characterCount++
+         }      
        });
     
+
+       $(".secImgc:nth-child(3)").click(function () {
+         if (starWars.characterCount == 0){
+            console.log(starWars.characterCount);
+            starWars.characters.darthMaul.selecLoc();
+            starWars.characterCount++
+         }else if (starWars.characterCount == 1){
+            console.log(starWars.characterCount);
+            starWars.characters.darthMaul.oppLoc();
+            starWars.characterCount++
+         }      
+       });
+
+       $(".secImgc:nth-child(4)").click(function () {
+         if (starWars.characterCount == 0){
+            console.log(starWars.characterCount);
+            starWars.characters.darthVadar.selecLoc();
+            starWars.characterCount++
+         }else if (starWars.characterCount == 1){
+            console.log(starWars.characterCount);
+            starWars.characters.darthVadar.oppLoc();
+            starWars.characterCount++
+         }      
+       });
+
+
+
 
 
       // maul opponent
@@ -195,17 +273,17 @@
 
       // Yoda  opponent 
       // $(".secImgc:nth-child(2)").click(function () {
+      //    starWars.characterCount++
       //    starWars.characters.yoda.selecLoc();
 
       // });
 
 
       // yoda selected
-      $(".secImgc:nth-child(2)").click(function () {
-         starWars.characters.yoda.oppLoc();
+      // $(".secImgc:nth-child(2)").click(function () {
+      //    starWars.characters.yoda.oppLoc();
 
-      });
-
+      // });
 
       //Luke selected
       // $(".secImgc:nth-child(1)").click(function () {
@@ -213,11 +291,9 @@
       // });
 
       //Luke  opponent
-      $(".secImgc:nth-child(1)").click(function () {
-         starWars.characters.luke.oppLoc();
-      });
-
-
+      // $(".secImgc:nth-child(1)").click(function () {
+      //    starWars.characters.luke.oppLoc()
+      // })
 
       // Vader  oponent
       // $(".secImgc:nth-child(4)").click(function () {
@@ -225,9 +301,29 @@
       // });
 
       //  Vader  selected
-      $(".secImgc:nth-child(4)").click(function () {
-         starWars.characters.darthVadar.oppLoc();
-      });
+      // $(".secImgc:nth-child(4)").click(function () {
+      //    starWars.characters.darthVadar.oppLoc();
+      // });
+
+      // $(".secImgc").click(function () {
+      //    if (starWars.characterCount == 0){
+            
+
+      //    }
+         
+      // });
+  
+
+      // for (var key in starWars.characters){
+      //      if (false ==starWars.characters[key].selected){
+      //       starWars.characterCount++
+      //         console.log(starWars.characterCount);
+            
+      //      } else {
+      //       console.log("they are NOT all false");
+      //      }
+      //    }
+
    </script>
 </body>
 
