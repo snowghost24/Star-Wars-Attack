@@ -55,6 +55,7 @@
          height: 900px;
       }
 
+      /* vs img */
       #vsimg {
          width: 200px;
          height: auto;
@@ -63,6 +64,46 @@
          top: 600px;
       
       }
+      /* fight img */
+      #vsimg2 {
+         width: 200px;
+         height: auto;
+         position: absolute;
+         right: 614px;
+         top: 480px;
+      
+      }
+
+    /* status bar */
+    #myProgress {
+  width: 30%;
+  background-color: #ddd;
+  position: absolute;
+  top:510px;
+  left: 164px;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: red;
+}
+
+#myProgress2 {
+  width: 30%;
+  background-color: #ddd;
+  position: absolute;
+  top:510px;
+  left: 820px;
+}
+
+#myBar2 {
+  width: 1%;
+  height: 30px;
+  background-color: red;
+}
+
+
    </style>
 </head>
 
@@ -76,9 +117,12 @@
    <div class="tcontainer">
       <div class="characters">
       </div>
+    
 
+   
 
-   </div>
+   <button onclick="move()">Click Me</button> 
+   <button onclick="move2()">Click Me</button> 
    <script>
       var starWars = {
          characterCount:0,
@@ -170,7 +214,13 @@
          hideVS:function(){
             console.log("im deep");
           $("#vsimg").hide();
-         }
+          $(".versus").append('<div id="myProgress">');
+               $("#myProgress").append('<div id="myBar">');
+                     $(".versus").append('<div id="myProgress2">');
+               $("#myProgress2").append('<div id="myBar2">');
+          $(".versus").append('<img id="vsimg2" src="assets/images/fight2.png">');
+                  
+         }, 
          
 
 
@@ -194,20 +244,8 @@
          document.querySelector(".characters").appendChild(secImg);
       }
 
-      //maul  selected 
-      // $(".secImgc:nth-child(1)").click(function () {
-      //    if (starWars.characterCount == 0){
-      //       console.log(starWars.characterCount);
-      //       starWars.characters.luke.selecLoc();
-      //       starWars.characterCount++
-      //    } else if (starWars.characterCount == 1){
-      //       console.log(starWars.characterCount);
-      //       starWars.characters.luke.oppLoc();
-      //       starWars.characterCount++
-      //    }      
-      //  });
-
-
+ 
+      // move players into battle location
        $(".secImgc:nth-child(1)").click(function () {
          if (starWars.characterCount == 0){
             console.log(starWars.characterCount);
@@ -219,9 +257,6 @@
             starWars.characterCount++
          }      
        });
-
-
-
 
        $(".secImgc:nth-child(2)").click(function () {
          if (starWars.characterCount == 0){
@@ -235,7 +270,6 @@
          }      
        });
     
-
        $(".secImgc:nth-child(3)").click(function () {
          if (starWars.characterCount == 0){
             console.log(starWars.characterCount);
@@ -262,7 +296,35 @@
 
 
 
+var width = 1;
+function move() {
+  var elem = document.getElementById("myBar");   
+ 
+  frame();
+  function frame() {
+    if (width >= 100) {
+      
+    } else {
+      width+=10; 
+      elem.style.width = width + '%'; 
+    }
+  }
+}
 
+var width2 = 1;
+function move2() {
+  var elem = document.getElementById("myBar2");   
+ 
+  frame2();
+  function frame2() {
+    if (width2 >= 100) {
+      
+    } else {
+      width2+=10; 
+      elem.style.width = width2 + '%'; 
+    }
+  }
+}
 
       // maul opponent
       // $(".secImgc:nth-child(3)").click(function () {
