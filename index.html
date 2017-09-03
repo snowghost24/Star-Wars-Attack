@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<head>
+   <!-- bootstrap link -->
+   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css'
+   />
+   <!-- jquery link -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <!-- css link -->
+   <link rel="stylesheet" href="assets/css/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Anton|Bahiana|Faster+One|Racing+Sans+One|Timmana" rel="stylesheet">
+   <title>Star Wars</title>
+   <style>
+      .charaqimg{
+         height: 250px;
+         width: auto;
+         max-width: 194px;
+         border: 2px solid black;
+      }
+      
+      .characters {
+         display: flex;
+         justify-content: space-around;
+      }
+
+      .titleName{
+         text-align: center;
+         color: white;
+
+      }
+      header {
+         background-color: black;
+         margin-bottom: 10px;
+         display: flex;
+         justify-content: center;
+      }
+      #headerImg{
+         height: 120px;
+         width: auto;
+         
+      }
+
+      body {
+         background-image:url("assets/images/ship.jpg");
+      }
+   </style>
+</head>
+
+<body>
+   <header>
+      <img id="headerImg" src="assets/images/stw3.jpeg" alt="">
+   </header>
+   <div class="characters">
+
+   </div>
+
+   <script>
+      var starWars = {
+         characters: {
+            luke: {
+               name: "Luke Skywalker",
+               image: "assets/images/lukecartoon.jpg"
+
+            },
+            yoda: {
+               name: "Yoda",
+               image: "assets/images/Yoda_cartoon.jpg",
+
+            },
+            darthMaul: {
+               name: "Darth Maul",
+               image: "assets/images/maul.jpg"
+
+            },
+            darthVadar: {
+               name: "Darth Vader",
+               image: "assets/images/vadar5.jpg"
+
+            }
+         },
+         attack: function () {
+
+         },
+         startGame: function () {
+
+
+         }
+
+      }
+      for (var key in starWars.characters) {
+         // console.log(key, starWars.characters[key].image);
+         var secImg = document.createElement("DIV");
+         var imageLocation = starWars.characters[key].image;
+         var names = starWars.characters[key].name;
+         var characterTitle = document.createElement("H3");
+         var img = document.createElement("IMG");
+         var divNode = document.createTextNode(names);
+         img.src = imageLocation;
+         characterTitle.setAttribute("class","titleName");
+         img.setAttribute("class","charaqimg");
+         characterTitle.append(divNode);
+         secImg.appendChild(img);
+         console.log(imageLocation);
+         secImg.appendChild(characterTitle);
+         document.querySelector(".characters").appendChild(secImg);   
+      }
+
+
+      
+ 
+      
+   </script>
+</body>
+
+</html>
